@@ -21,4 +21,4 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 
-*.AddIn binary
+*.esriAddIn binary
