@@ -1,0 +1,29 @@
+﻿<ESRI.Configuration xmlns="http://schemas.esri.com/Desktop/AddIns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>QuickFindArcCatalogAddin</Name>
+  <AddInID>{0e1c1d9b-1ee1-4848-a7ca-b1afd23d0feb}</AddInID>
+  <Description>Type in a description for this Add-in.</Description>
+  <Version>1.0</Version>
+  <Image>Images\QuickFindArcCatalogAddin.png</Image>
+  <Author>Anthony Warren</Author>
+  <Company>Caslys Consulting Ltd</Company>
+  <Date>29/08/2014</Date>
+  <Targets>
+    <Target name="Desktop" version="10.1" />
+  </Targets>
+  <AddIn language="CLR" library="QuickFindArcCatalogAddin.dll" namespace="QuickFindArcCatalogAddin">
+    <ArcCatalog>
+      <Commands>
+        <Button id="Caslys_Consulting_Ltd_QuickFindArcCatalogAddin_ButtonClear" class="ButtonClear" message="Clear QuickFind Filter Combo Box" caption="Clear" tip="Clear Filter" category="Quick Find" image="Images\Button1.png" />
+        <ComboBox id="Caslys_Consulting_Ltd_QuickFindArcCatalogAddin_ComboFilter" class="ComboFilter" message="Enter text to filter contents view currently in focus.  Press Enter to add entry to combo box." caption="Filter" tip="Filter Text" category="Quick Find" image="Images\Combo1.png" editable="true" rows="10" sizeString="WWWWWWWWWWWWWWWWWW" itemSizeString="WWWWWWWWWWWWWWWWW" />
+      </Commands>
+      <Toolbars>
+        <Toolbar id="Caslys_Consulting_Ltd_QuickFindArcCatalogAddin_Quick_Filter" caption="Quick Find" showInitially="false">
+          <Items>
+            <Button refID="Caslys_Consulting_Ltd_QuickFindArcCatalogAddin_ButtonClear" />
+            <ComboBox refID="Caslys_Consulting_Ltd_QuickFindArcCatalogAddin_ComboFilter" />
+          </Items>
+        </Toolbar>
+      </Toolbars>
+    </ArcCatalog>
+  </AddIn>
+</ESRI.Configuration>

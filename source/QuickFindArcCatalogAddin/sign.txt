@@ -1,0 +1,3 @@
+﻿"C:\Program Files (x86)\Common Files\ArcGIS\bin\ESRISignAddIn.exe" "C:\Users\Anthony\Documents\Visual Studio 2010\Projects\QuickFindArcCatalogAddin\QuickFindArcCatalogAddin\bin\Debug\QuickFindArcCatalogAddin.esriAddIn"
+
+"C:\Program Files (x86)\Common Files\ArcGIS\bin\ESRISignAddIn.exe" "C:\temp\QuickFindArcCatalogAddin.esriAddIn"
