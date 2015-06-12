@@ -52,7 +52,7 @@ namespace QuickFindArcCatalogAddin
 
         protected override void OnEnter()
         {
-            base.OnEnter();
+            //base.OnEnter();
             UpdateItems(this.Value);
         }        
 
@@ -64,7 +64,7 @@ namespace QuickFindArcCatalogAddin
 
         protected override void OnEditChange(string editString)
         {
-            base.OnEditChange(editString);
+            //base.OnEditChange(editString);
             Debug.WriteLine("OnEditChange: " + editString);
             _timer.Enabled = false;
             _timer.Enabled = true;
@@ -74,7 +74,7 @@ namespace QuickFindArcCatalogAddin
 
         protected override void OnSelChange(int cookie)
         {
-            base.OnSelChange(cookie);
+            //base.OnSelChange(cookie);
             _timer.Enabled = false;
             Debug.WriteLine("OnSelChange");
             DoFilter();
@@ -89,7 +89,7 @@ namespace QuickFindArcCatalogAddin
 
         public void DoFilter()
         {
-
+            Debug.WriteLine(string.Format("DoFilter: {0}", this.Value));
             string filterString = this.Value;
             Debug.WriteLine(filterString);
 
@@ -136,6 +136,7 @@ namespace QuickFindArcCatalogAddin
 
         private void UpdateItems(string filterString)
         {
+            Debug.WriteLine(string.Format("UpdateItems: {0}",filterString));
             Item existingItem = null;
             List<string> itemsHistory = new List<string>();
             foreach (var item in this.items)

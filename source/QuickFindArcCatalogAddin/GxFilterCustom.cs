@@ -20,7 +20,8 @@ namespace QuickFindArcCatalogAddin
         }
 
         public bool CanDisplayObject(IGxObject @object)
-        {            
+        {          
+
             if (@object.Name.ToLower().Contains(this.Filter.ToLower()))
                 return true;
             else
