@@ -2,13 +2,13 @@
   <Name>QuickFindArcCatalogAddin</Name>
   <AddInID>{0e1c1d9b-1ee1-4848-a7ca-b1afd23d0feb}</AddInID>
   <Description>Type in a description for this Add-in.</Description>
-  <Version>1.0</Version>
+  <Version>1.1</Version>
   <Image>Images\QuickFindArcCatalogAddin.png</Image>
   <Author>Anthony Warren</Author>
   <Company>Caslys Consulting Ltd</Company>
-  <Date>29/08/2014</Date>
+  <Date>28/09/2017</Date>
   <Targets>
-    <Target name="Desktop" version="10.1" />
+    <Target name="Desktop" version="10.2" />
   </Targets>
   <AddIn language="CLR" library="QuickFindArcCatalogAddin.dll" namespace="QuickFindArcCatalogAddin">
     <ArcCatalog>

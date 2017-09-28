@@ -21,7 +21,7 @@ namespace QuickFindArcCatalogAddin
 
         public bool CanDisplayObject(IGxObject @object)
         {          
-
+            //* filter is evaluated to determine if the gxobject should be displayed
             if (@object.Name.ToLower().Contains(this.Filter.ToLower()))
                 return true;
             else

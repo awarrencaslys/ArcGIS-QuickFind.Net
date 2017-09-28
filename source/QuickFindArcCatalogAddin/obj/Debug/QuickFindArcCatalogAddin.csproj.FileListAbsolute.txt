@@ -1,0 +1,5 @@
+\\CASLYS-ANTHONY\GitHub\QuickFind.Net\source\QuickFindArcCatalogAddin\bin\Debug\QuickFindArcCatalogAddin.dll
+\\CASLYS-ANTHONY\GitHub\QuickFind.Net\source\QuickFindArcCatalogAddin\bin\Debug\QuickFindArcCatalogAddin.pdb
+\\CASLYS-ANTHONY\GitHub\QuickFind.Net\source\QuickFindArcCatalogAddin\obj\Debug\QuickFindArcCatalogAddin.dll
+\\CASLYS-ANTHONY\GitHub\QuickFind.Net\source\QuickFindArcCatalogAddin\obj\Debug\QuickFindArcCatalogAddin.pdb
+\\CASLYS-ANTHONY\GitHub\QuickFind.Net\source\QuickFindArcCatalogAddin\bin\Debug\QuickFindArcCatalogAddin.esriAddIn

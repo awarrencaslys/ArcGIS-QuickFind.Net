@@ -6,6 +6,7 @@ using ESRI.ArcGIS.Catalog;
 using System.Timers;
 using ESRI.ArcGIS.CatalogUI;
 using System.Diagnostics;
+using ESRI.ArcGIS.esriSystem;
 
 namespace QuickFindArcCatalogAddin
 {
@@ -87,48 +88,86 @@ namespace QuickFindArcCatalogAddin
             DoFilter();
         }
 
+        IGxObjectFilter pGxObjectFilter = new GxFilterCustom();
+
+        private List<IGxObject> filteredObjects = new List<IGxObject>();
+
         public void DoFilter()
         {
-            Debug.WriteLine(string.Format("DoFilter: {0}", this.Value));
-            string filterString = this.Value;
-            Debug.WriteLine(filterString);
-
-            IGxObject pGxObj;
-            IEnumGxObject pEnumGxObject;
-                       
-
-            IGxSelection pGxSelection = _pGxApp.Selection;
-
-            if (pGxSelection == null) return;
-            
-            IGxObject pGxObject_Current = pGxSelection.Location;
-            IGxObjectContainer pGxObjectContainer = null;
-            if (pGxObject_Current is IGxObjectContainer)
+            try
             {
-                pGxObjectContainer = pGxObject_Current as IGxObjectContainer;
-            }
+                IFilterValue filter = pGxObjectFilter as IFilterValue;
+                filter.Filter = "";
+                
+                filteredObjects.Clear();
 
-            if (!pGxObjectContainer.HasChildren) return;
+                Debug.WriteLine(string.Format("DoFilter: {0}", this.Value));
+                string filterString = this.Value;
+                Debug.WriteLine(filterString);
 
-            pEnumGxObject = pGxObjectContainer.Children;
+                IGxObject pGxObj;
+                IEnumGxObject pEnumGxObject;
 
-            if (pEnumGxObject == null) return;
+
+                IGxSelection pGxSelection = _pGxApp.Selection;
+
+                if (pGxSelection == null) return;
+
+                IEnumGxObject pSelectedGxObjects = pGxSelection.SelectedObjects;
+
+                IGxObject pGxObject_Current = pGxSelection.Location;
 
 
-            IGxObjectFilter pGxObjectFilter = new GxFilterCustom();
-            IFilterValue filter = pGxObjectFilter as IFilterValue;
-            filter.Filter = filterString;
-            
-            pGxObj = pEnumGxObject.Next();
-            while (pGxObj != null)
-            {
-                pGxObjectFilter.CanDisplayObject(pGxObj);
+                IGxObjectContainer pGxObjectContainer = null;
+                if (pGxObject_Current is IGxObjectContainer)
+                {
+                    pGxObjectContainer = pGxObject_Current as IGxObjectContainer;
+                }
+
+
+                if (!pGxObjectContainer.HasChildren) return;
+
+                pEnumGxObject = pGxObjectContainer.Children;
+
+                if (pEnumGxObject == null) return;
+
+                filter = pGxObjectFilter as IFilterValue;
+                filter.Filter = filterString;
+
                 pGxObj = pEnumGxObject.Next();
+                while (pGxObj != null)
+                {
+
+                    bool canDisplay = pGxObjectFilter.CanDisplayObject(pGxObj);
+                    if (canDisplay == false)
+                    {
+                        //* if the object is not going to be displayed (due to being filtered out) we will track it so we can unselect it later (if it was selected)
+                        filteredObjects.Add(pGxObj);
+                    }
+
+                    pGxObj = pEnumGxObject.Next();
+                }
+
+                //* Since selected objects stay selected after filtering, we need to manually unselect hidden items due to the filter
+                IGxObject pGxObjSelected = pSelectedGxObjects.Next();
+                while (pGxObjSelected != null)
+                {
+                    if (filteredObjects.Contains(pGxObjSelected))
+                    {
+                        Debug.WriteLine("Selected Object that is hidden: " + pGxObjSelected.FullName);
+                        pGxSelection.Unselect(pGxObjSelected, null);
+                    }
+
+                    pGxObjSelected = pSelectedGxObjects.Next();
+                }
+
+                pGxContentsView.ObjectFilter = pGxObjectFilter;
+                _pGxView.Refresh();
             }
-
-
-            pGxContentsView.ObjectFilter = pGxObjectFilter;
-            _pGxView.Refresh();
+            catch(Exception ex) 
+            {
+                ArcCatalog.Application.StatusBar.set_Message(0, ex.Message);
+            }
 
             //UpdateItems(filterString);
 
