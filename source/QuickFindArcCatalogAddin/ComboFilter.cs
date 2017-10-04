@@ -98,7 +98,7 @@ namespace QuickFindArcCatalogAddin
             {
                 IFilterValue filter = pGxObjectFilter as IFilterValue;
                 filter.Filter = "";
-                
+
                 filteredObjects.Clear();
 
                 Debug.WriteLine(string.Format("DoFilter: {0}", this.Value));
@@ -162,11 +162,15 @@ namespace QuickFindArcCatalogAddin
                 }
 
                 pGxContentsView.ObjectFilter = pGxObjectFilter;
-                _pGxView.Refresh();
+
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 ArcCatalog.Application.StatusBar.set_Message(0, ex.Message);
+            }
+            finally
+            {
+                _pGxView.Refresh();
             }
 
             //UpdateItems(filterString);

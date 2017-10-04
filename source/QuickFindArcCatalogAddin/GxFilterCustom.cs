@@ -22,7 +22,7 @@ namespace QuickFindArcCatalogAddin
         public bool CanDisplayObject(IGxObject @object)
         {          
             //* filter is evaluated to determine if the gxobject should be displayed
-            if (@object.Name.ToLower().Contains(this.Filter.ToLower()))
+            if (@object.Name.ToLower().Contains(this._Filter))
                 return true;
             else
                 return false;
@@ -43,6 +43,16 @@ namespace QuickFindArcCatalogAddin
             get {return "CustomFilter";}
         }
 
-        public string Filter { get; set; }
+        private string _Filter;
+        public string Filter
+        {
+            get
+            {
+                return _Filter;
+            }
+            set {
+                _Filter = value != null ? value.ToLower() : "";
+            }
+        }
     }
 }
